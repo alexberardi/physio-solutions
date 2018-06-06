@@ -1,0 +1,12 @@
+.logo-container {
+	display: flex;
+	align-items: flex-start;
+	background: $off-white;
+	margin: 0;
+}
+
+.main-logo {
+	background: $off-white;
+	height: 20rem;
+	width: 20rem;
+}

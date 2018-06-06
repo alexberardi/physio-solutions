@@ -1,0 +1,46 @@
+.contact-container {
+	align-items: center;
+	flex-direction: column;
+	margin: $xl-size;
+	width: 100%;
+}
+
+.contact-container ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $purple;
+    
+    font-style: italic;
+    opacity: 1; /* Firefox */
+}
+
+contact-container :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $purple;
+}
+
+contact-container ::-ms-input-placeholder { /* Microsoft Edge */
+    color: $purple;
+}
+
+.contact-container input {
+	height: $l-size;
+}
+
+.contact-container textarea {
+	height: $text-area-size;
+}
+
+
+.contact-container input, textarea {
+	color: $purple;
+	display: block;
+	margin-bottom: $m-size;
+
+  	width: 100%;
+}
+
+
+
+@media (min-width: $desktop-breakpoint) {
+  .contact-container {
+  	margin: 0;
+  }
+}

@@ -1,0 +1,41 @@
+.service-item-container {
+	border-color: $purple;
+	border-style: solid;
+	border-width: 1px;
+	margin-bottom: $s-size;
+	padding: 0 $s-size 0 $s-size;
+	width: 100%;
+}
+
+.service-image-and-description-container {
+	align-items: center;
+	display: column;
+}
+
+.service-item-container-header {
+	margin-top: $s-size;
+}
+
+.service-image-and-description-container img {
+	height: auto; 
+    width: auto;
+    max-width: 20rem; 
+    max-height: 20rem;
+    padding-bottom: $s-size;
+}
+
+.service-image-and-description-container p {
+	width: 75%;
+}
+
+
+@media (min-width: $desktop-breakpoint) {
+  .service-image-and-description-container {
+	display: flex;
+	}
+	.service-image-and-description-container p {
+		margin: 0;
+		padding-left: $s-size;
+		width: 75%;
+	}
+}
