@@ -12,11 +12,14 @@
 	margin: 0 auto;
 	max-width: 80rem;
 	align-items: center;
+	margin-bottom: $l-size;
+	padding-left: $s-size;
+	padding-right: $s-size;
 	max-width: 80rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	padding: 0 $s-size $s-size $s-size;
+	padding: $s-size $s-size $s-size $s-size;
 }
 
 .content p {
@@ -29,6 +32,6 @@
 	}
 
 	.content {
-		padding: 0 0 0 0;
+		margin-bottom: $l-size;
 	}
 }
