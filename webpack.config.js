@@ -1,3 +1,5 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 const path = require("path");
 var envFile = require('node-env-file');
 
@@ -11,34 +13,56 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'develop';
   }
 
 
-console.log(process.env.TO_EMAIL_ADDRESS);
 
+module.exports = (env) => {
 
-module.exports = {
-  entry: "./src/app.js",
-  output: {
-    path: path.join(__dirname, "public"),
-    filename: "bundle.js"
-  },
-  module: {
-    rules: [
-      {
-        loader: "babel-loader",
-        test: /\.js$/,
-        exclude: /node_modules/
-      },
-      {
-        test: /\.s?css$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+  const isProduction = env === 'production';
+  const CSSExtract = new ExtractTextPlugin('styles.css');
+
+  console.log('env', env);
+  return {
+    entry: "./src/app.js",
+    output: {
+      path: path.join(__dirname, "public"),
+      filename: "bundle.js"
+    },
+    module: {
+      rules: [
+        {
+          loader: "babel-loader",
+          test: /\.js$/,
+          exclude: /node_modules/
+        },
+        {
+          test: /\.s?css$/,
+          use: CSSExtract.extract({
+            use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true
+              }
+            }, 
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: true
+              }
+            }
+            ]
+          })
+      }]
+    },
+    plugins: [
+      CSSExtract
+    ],
+    devtool: isProduction ? 'source-map' : 'inline-source-map',
+    devServer: {
+      contentBase: path.join(__dirname, "public"),
+      historyApiFallback: true,
+      proxy: {
+        "/api": "http://localhost:3000"
       }
-    ]
-  },
-  devtool: "cheap-module-eval-source-map",
-  devServer: {
-    contentBase: path.join(__dirname, "public"),
-    historyApiFallback: true,
-    proxy: {
-      "/api": "http://localhost:3000"
-  }
-  }
+    }
+  };
 };
