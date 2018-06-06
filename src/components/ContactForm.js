@@ -11,8 +11,9 @@ export default class ContactForm extends React.Component {
 				subject: '',
 				message: '',
 				success: false,
+				successMessage: undefined,
 				error: false,
-				errorMessages: undefined
+				errorMessage: undefined
 		}
 	}
 
@@ -41,12 +42,12 @@ export default class ContactForm extends React.Component {
 		e.preventDefault();
 
 		if (this.state.name.length === 0 || this.state.email === 0 || this.state.subject === 0 || this.state.message === 0) {
-			this.setState(() => ({errorMessages : 'Please fill in all fields.'}));
+			this.setState(() => ({errorMessage : 'Please fill in all fields.'}));
 				return;
 		}
 
 		if (!this.validateEmail(this.state.email)) {
-			errorMessages = 'Please enter a valid email address';
+			this.setState(() => ({errorMessage : 'Please enter a valid email address'}));
 			return;
 		}
 
@@ -64,6 +65,16 @@ export default class ContactForm extends React.Component {
 		  console.log(error);
 		});
 
+		this.setState(() => ({
+			name: '',
+			email: '',
+			subject: '',
+			message: '',
+			success: true,
+			successMessage: 'Email successfully sent.',
+			error: false,
+			errorMessage: undefined
+		}));
 
 	}
 
@@ -77,7 +88,10 @@ export default class ContactForm extends React.Component {
 			<div className="contact-container">
 				<form onSubmit={this.onSubmit}>
 					<div>
-						{this.state.errorMessages}
+						{this.state.errorMessage}						
+					</div>
+					<div>
+						{this.state.successMessage}
 					</div>
 					<input type="text" placeholder="Your Name" autoFocus value={this.state.name} onChange={this.onNameChange} />
 					<input type="text" placeholder="john.doe@email.com" value={this.state.email} onChange={this.onEmailChange} />

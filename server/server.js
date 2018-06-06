@@ -14,7 +14,7 @@ const envFile = require('node-env-file');
 process.env.NODE_ENV = process.env.NODE_ENV || 'develop';
 
 try {
-	envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV + '.env'));
+	envFile(path.join(__dirname, '../config/' + process.env.NODE_ENV + '.env'));
 } catch (e) {
 
 }
@@ -35,7 +35,6 @@ app.post('/contact/email', function(req, res) {
           }
       });
 
- 	console.log(body.email);
  	const from = body.name + ' <' + body.email + '>';
 
 	let mailOptions = {
